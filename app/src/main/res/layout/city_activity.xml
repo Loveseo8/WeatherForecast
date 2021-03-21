@@ -13,24 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <!--<ListView
+    <Spinner
         android:layout_margin="5dp"
-        android:id="@+id/list_view"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="1dp"
+        android:id="@+id/year"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graphi"
-        android:layout_margin="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>-->
-
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/linechart"
-        android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="558dp"
+        android:layout_margin="5dp" />
+
+    <Button
+        android:layout_margin="5dp"
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Построить за выбранный год"/>
 
 </LinearLayout>
