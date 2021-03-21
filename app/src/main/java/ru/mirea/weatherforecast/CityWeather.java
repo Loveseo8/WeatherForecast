@@ -10,6 +10,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -53,7 +56,19 @@ public class CityWeather extends AppCompatActivity {
         }
 
         lineChart = (LineChart) findViewById(R.id.linechart);
-        
+
+        ArrayList<Entry> entries = new ArrayList<>();
+        // Массив координат точек
+        for(int m = 0; m < cities.size(); m++) {
+            entries.add(new Entry(m + 1, (float) Double.parseDouble(cities.get(m))));
+        }
+
+        LineDataSet dataset = new LineDataSet(entries, "Температура за год");
+
+        LineData data = new LineData(dataset);
+        lineChart.setData(data);
+
+        lineChart.invalidate();
 
     }
 
