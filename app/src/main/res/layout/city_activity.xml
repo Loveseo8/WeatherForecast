@@ -5,15 +5,32 @@
 
     <TextView
         android:id="@+id/city_nmae"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:padding="15dp"
+        android:textSize="16dp"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <ListView
+    <!--<ListView
         android:layout_margin="5dp"
         android:id="@+id/list_view"
         android:divider="@color/colorPrimary"
         android:dividerHeight="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graphi"
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>-->
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/linechart"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package ru.mirea.weatherforecast;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -10,11 +9,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+import com.jjoe64.graphview.series.PointsGraphSeries;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +31,7 @@ public class CityWeather extends AppCompatActivity {
 
     TextView city;
     String selected;
-    ListView listView;
-    ListViewAdapter adapter;
+    LineChart lineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +43,38 @@ public class CityWeather extends AppCompatActivity {
 
         city = findViewById(R.id.city_nmae);
         city.setText(selected);
-
-        List<String> temp = null;
+        List<String> cities = null;
         try {
-            temp = jsonParsing(selected);
+            cities = jsonParsing(selected);
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        listView = findViewById(R.id.list_view);
-        adapter = new ListViewAdapter(this, temp);
-        listView.setAdapter(adapter);
+        lineChart = (LineChart) findViewById(R.id.linechart);
+        
 
     }
 
     List jsonParsing(String selected) throws JSONException, IOException {
 
+        StringBuilder sb = new StringBuilder();
+        InputStream is = getAssets().open(selected + ".json");
+        BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        String str;
+        while ((str = br.readLine()) != null){
+
+            sb.append(str);
+
+        }
+        br.close();
         List<String> temperature = new ArrayList<>();
-        JSONArray jsonArray = new JSONArray(getApplicationContext().getAssets().open(selected + ".json"));
+        JSONArray jsonArray = new JSONArray(sb.toString());
         for(int i = 0; i < jsonArray.length(); i++){
 
-            JSONObject object = jsonArray.getJSONObject(i);
-            String value = object.;
+            String value = jsonArray.get(i).toString();
             temperature.add(value);
-            Log.d("TAGA", value);
 
         }
 
