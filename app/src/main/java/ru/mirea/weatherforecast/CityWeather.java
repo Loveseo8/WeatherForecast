@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,14 +16,9 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,17 +35,79 @@ public class CityWeather extends AppCompatActivity {
     int selected1;
     LineChart lineChart;
     Button btn;
+    double add = 0;
     List<String> cities = null;
-    List<String> tear = null;
     Spinner spinner;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.city_activity);
 
+
         Intent i = getIntent();
         selected = i.getStringExtra("CityName");
+
+        switch(selected){
+
+            case "Алмазный":
+                add = 0.27;
+                break;
+
+            case "Западный":
+                add = 1.12;
+                break;
+
+            case "Курортный":
+                add = 0.32;
+                break;
+
+            case "Лесной":
+                add = -2.23;
+                break;
+
+            case "Научный":
+                add = -0.23;
+                break;
+
+            case "Полярный":
+                add = 0.24;
+                break;
+
+            case "Портовый":
+                add = 1.75;
+                break;
+
+            case "Приморский":
+                add = 2.4;
+                break;
+
+            case "Садовый":
+                add = -0.27;
+                break;
+
+            case "Северный":
+                add = 1.75;
+                break;
+
+            case "Степной":
+                add = 2.22;
+                break;
+
+            case "Таежный":
+                add = 1.75;
+                break;
+
+            case "Южный":
+                add = 2.22;
+                break;
+
+
+        }
 
         city = findViewById(R.id.city_nmae);
         city.setText(selected);
@@ -80,7 +136,7 @@ public class CityWeather extends AppCompatActivity {
         lineChart.invalidate();
 
         spinner = findViewById(R.id.year);
-        String[] years = {"1", "2", "3", "4", "5", "6 ", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+        String[] years = {"1", "2", "3", "4", "5", "6 ", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, years);
         spinner.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -98,6 +154,12 @@ public class CityWeather extends AppCompatActivity {
 
             }
         });
+
+        for(int n = 0; n < 365; n++){
+
+            cities.add(cities.get(6935 + n) + add);
+
+        }
 
 
 
@@ -201,6 +263,10 @@ public class CityWeather extends AppCompatActivity {
                 start = 6935;
                 break;
 
+            case 21:
+                start = 7300;
+                break;
+
 
             default:
                 break;
@@ -287,6 +353,10 @@ public class CityWeather extends AppCompatActivity {
 
             case 20:
                 end = 7300;
+                break;
+
+            case 21:
+                end = 7665;
                 break;
 
 
